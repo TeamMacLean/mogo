@@ -12,7 +12,10 @@ LazyData: true
 biocViews:
 Imports: 
     clusterProfiler,
+    dplyr,
+    enrichplot,
     ggupset,
+    GOplot,
     here,
     readr
 Roxygen: list(markdown = TRUE)
