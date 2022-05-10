@@ -1,7 +1,7 @@
 Basic GO Analysis with mogo
 ================
 Dan MacLean
-29 April, 2022
+10 May, 2022
 
 ## mogo
 
@@ -21,7 +21,7 @@ install.packages("devtools")
 Once `devtools` is installed you can use that to install `mogo`
 
 ``` r
-devtools::install_github("TeamMacLean/mogo@usenames")
+devtools::install_github("TeamMacLean/mogo@")
 ```
 
 ## Preparation
