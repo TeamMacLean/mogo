@@ -21,7 +21,7 @@ install.packages("devtools")
 Once `devtools` is installed you can use that to install `mogo`
 
 ``` r
-devtools::install_github("TeamMacLean/mogo@")
+devtools::install_github("TeamMacLean/mogo")
 ```
 
 ## Preparation
