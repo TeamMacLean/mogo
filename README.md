@@ -1,13 +1,13 @@
 Basic GO Analysis with mogo
 ================
 Dan MacLean
-23 June, 2021
+29 April, 2022
 
 ## mogo
 
 `mogo` is a package for generating GO analysis using *M*.oryzae genes
 only. You can provide the main function with the list of genes of
-interest and it does (most of) the rest\!
+interest and it does (most of) the rest!
 
 ## Installation
 
@@ -21,7 +21,7 @@ install.packages("devtools")
 Once `devtools` is installed you can use that to install `mogo`
 
 ``` r
-devtools::install_github("TeamMacLean/mogo")
+devtools::install_github("TeamMacLean/mogo@usenames")
 ```
 
 ## Preparation
@@ -33,7 +33,8 @@ list of genes for GO analysis
 
 First read in your gene expression file. You can do that with
 `read_csv()`. Minimally it should contain the gene ID, the log fold
-change and the \(p\)-value.
+change and the
+![p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p "p")-value.
 
 ``` r
 library(readr)
@@ -42,7 +43,7 @@ library(here)
 
 gene_expression <- read_csv(here("inst", "extdata","sample_gene_expression.csv"))
 gene_expression
-#> # A tibble: 132 x 3
+#> # A tibble: 132 × 3
 #>    gene_id   log2fc  p.adj
 #>    <chr>      <dbl>  <dbl>
 #>  1 MGG_16981  3.53  0.291 
@@ -61,12 +62,13 @@ gene_expression
 ### Filter as required
 
 We can now filter the genes to select only the ones with e.g
-\(p <= 0.05\), using `filter()`
+![p \<= 0.05](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%20%3C%3D%200.05 "p <= 0.05"),
+using `filter()`
 
 ``` r
 filtered_gene_expression <- filter(gene_expression, p.adj <= 0.05)
 filtered_gene_expression
-#> # A tibble: 16 x 3
+#> # A tibble: 16 × 3
 #>    gene_id   log2fc    p.adj
 #>    <chr>      <dbl>    <dbl>
 #>  1 MGG_16442  3.60  0.0434  
@@ -116,22 +118,21 @@ enrich
 #> #...@ontology     UNKNOWN 
 #> #...@gene     chr [1:16] "MGG_16442" "MGG_14022" "MGG_00427" "MGG_10367" "MGG_00015" ...
 #> #...pvalues adjusted by 'BH' with cutoff <0.05 
-#> #...5 enriched terms found
-#> 'data.frame':    5 obs. of  9 variables:
-#>  $ ID         : chr  "GO:0032259" "GO:0008168" "GO:0008171" "GO:0008033" ...
-#>  $ Description: chr  "The process in which a methyl group is covalently attached to a molecule." "Catalysis of the transfer of a methyl group to an acceptor molecule." "Catalysis of the transfer of a methyl group to the oxygen atom of an acceptor molecule." "The process in which a pre-tRNA molecule is converted to a mature tRNA, ready for addition of an aminoacyl group." ...
+#> #...7 enriched terms found
+#> 'data.frame':    7 obs. of  9 variables:
+#>  $ ID         : chr  "GO:0032259" "GO:0008168" "GO:0008171" "GO:0001510" ...
+#>  $ Description: chr  "methylation" "methyltransferase activity" "O-methyltransferase activity" "RNA methylation" ...
 #>  $ GeneRatio  : chr  "16/16" "16/16" "3/16" "2/16" ...
-#>  $ BgRatio    : chr  "133/10093" "136/10093" "18/10093" "55/10093" ...
-#>  $ pvalue     : num  3.27e-31 4.77e-31 2.63e-06 3.33e-03 6.27e-03
-#>  $ p.adjust   : num  6.21e-30 6.21e-30 2.28e-05 2.17e-02 3.26e-02
-#>  $ qvalue     : num  3.27e-30 3.27e-30 1.20e-05 1.14e-02 1.72e-02
-#>  $ geneID     : chr  "MGG_16442/MGG_14022/MGG_00427/MGG_10367/MGG_00015/MGG_01295/MGG_05721/MGG_13781/MGG_14886/MGG_14863/MGG_01492/M"| __truncated__ "MGG_16442/MGG_14022/MGG_00427/MGG_10367/MGG_00015/MGG_01295/MGG_05721/MGG_13781/MGG_14886/MGG_14863/MGG_01492/M"| __truncated__ "MGG_14022/MGG_00427/MGG_00015" "MGG_04562/MGG_00559" ...
-#>  $ Count      : int  16 16 3 2 2
+#>  $ BgRatio    : chr  "132/10114" "136/10114" "18/10114" "10/10114" ...
+#>  $ pvalue     : num  2.78e-31 4.62e-31 2.61e-06 1.05e-04 3.44e-03 ...
+#>  $ p.adjust   : num  7.16e-30 7.16e-30 2.70e-05 8.12e-04 2.13e-02 ...
+#>  $ qvalue     : num  3.65e-30 3.65e-30 1.38e-05 4.14e-04 1.09e-02 ...
+#>  $ geneID     : chr  "MGG_16442/MGG_14022/MGG_00427/MGG_10367/MGG_00015/MGG_01295/MGG_05721/MGG_13781/MGG_14886/MGG_14863/MGG_01492/M"| __truncated__ "MGG_16442/MGG_14022/MGG_00427/MGG_10367/MGG_00015/MGG_01295/MGG_05721/MGG_13781/MGG_14886/MGG_14863/MGG_01492/M"| __truncated__ "MGG_14022/MGG_00427/MGG_00015" "MGG_05721/MGG_00559" ...
+#>  $ Count      : int  16 16 3 2 2 2 3
 #> #...Citation
-#>   Guangchuang Yu, Li-Gen Wang, Yanyan Han and Qing-Yu He.
-#>   clusterProfiler: an R package for comparing biological themes among
-#>   gene clusters. OMICS: A Journal of Integrative Biology
-#>   2012, 16(5):284-287
+#>  T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu.
+#>  clusterProfiler 4.0: A universal enrichment tool for interpreting omics data.
+#>  The Innovation. 2021, 2(3):100141
 ```
 
 As you can see the `enrich` object has a lot of information in it. The
@@ -142,17 +143,17 @@ printing out big dataframes).
 ``` r
 result_table <- as.data.frame(enrich)
 glimpse(result_table)
-#> Rows: 5
+#> Rows: 7
 #> Columns: 9
-#> $ ID          <chr> "GO:0032259", "GO:0008168", "GO:0008171", "GO:0008033", "G…
-#> $ Description <chr> "The process in which a methyl group is covalently attache…
-#> $ GeneRatio   <chr> "16/16", "16/16", "3/16", "2/16", "2/16"
-#> $ BgRatio     <chr> "133/10093", "136/10093", "18/10093", "55/10093", "76/1009…
-#> $ pvalue      <dbl> 3.269250e-31, 4.773264e-31, 2.629052e-06, 3.331689e-03, 6.…
-#> $ p.adjust    <dbl> 6.205243e-30, 6.205243e-30, 2.278511e-05, 2.165598e-02, 3.…
-#> $ qvalue      <dbl> 3.265917e-30, 3.265917e-30, 1.199217e-05, 1.139788e-02, 1.…
+#> $ ID          <chr> "GO:0032259", "GO:0008168", "GO:0008171", "GO:0001510", "G…
+#> $ Description <chr> "methylation", "methyltransferase activity", "O-methyltran…
+#> $ GeneRatio   <chr> "16/16", "16/16", "3/16", "2/16", "2/16", "2/16", "3/16"
+#> $ BgRatio     <chr> "132/10114", "136/10114", "18/10114", "10/10114", "56/1011…
+#> $ pvalue      <dbl> 2.781819e-31, 4.617021e-31, 2.612786e-06, 1.048125e-04, 3.…
+#> $ p.adjust    <dbl> 7.156383e-30, 7.156383e-30, 2.699879e-05, 8.122967e-04, 2.…
+#> $ qvalue      <dbl> 3.645017e-30, 3.645017e-30, 1.375151e-05, 4.137334e-04, 1.…
 #> $ geneID      <chr> "MGG_16442/MGG_14022/MGG_00427/MGG_10367/MGG_00015/MGG_012…
-#> $ Count       <int> 16, 16, 3, 2, 2
+#> $ Count       <int> 16, 16, 3, 2, 2, 2, 3
 ```
 
 You can save the result to an excel-compatible csv file with,
@@ -175,18 +176,16 @@ Works ok, but the text can make it a bit unwieldy
 
 ``` r
 library(clusterProfiler)
-#> Warning: package 'clusterProfiler' was built under R version 4.0.3
-#> clusterProfiler v3.18.1  For help: https://guangchuangyu.github.io/software/clusterProfiler
+#> clusterProfiler v4.4.0  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
 #> 
 #> If you use clusterProfiler in published research, please cite:
-#> Guangchuang Yu, Li-Gen Wang, Yanyan Han, Qing-Yu He. clusterProfiler: an R package for comparing biological themes among gene clusters. OMICS: A Journal of Integrative Biology. 2012, 16(5):284-287.
+#> T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141
 #> 
 #> Attaching package: 'clusterProfiler'
 #> The following object is masked from 'package:stats':
 #> 
 #>     filter
 library(enrichplot)
-#> Warning: package 'enrichplot' was built under R version 4.0.3
 barplot(enrich, showCategory=5)
 ```
 
@@ -198,7 +197,6 @@ Similar
 
 ``` r
 dotplot(enrich, showCategory=5)
-#> wrong orderBy parameter; set to default `orderBy = "x"`
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
@@ -225,14 +223,13 @@ part.
 
 ``` r
 david <- enricher_to_david(enrich)
-#> 
+#> Rows: 59619 Columns: 6
 #> ── Column specification ────────────────────────────────────────────────────────
-#> cols(
-#>   GeneID = col_character(),
-#>   `GO term definition` = col_character(),
-#>   `GO term accession` = col_character(),
-#>   `GO domain` = col_character()
-#> )
+#> Delimiter: "\t"
+#> chr (6): Gene stable ID, GO term accession, GO term name, GO term definition...
+#> 
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 expr_info <- data.frame(
   ID = filtered_gene_expression$gene_id,
   logFC = filtered_gene_expression$log2fc

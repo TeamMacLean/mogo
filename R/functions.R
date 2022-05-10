@@ -12,12 +12,12 @@ mo_mapping <- function(termsfile=here::here("inst", "extdata", "MG8_mart_export.
 
   term2gene <- data.frame(
     term = terms$`GO term accession`,
-    gene = terms$GeneID
+    gene = terms$`Gene stable ID`
   )
 
   term2name <- data.frame(
     term = terms$`GO term accession`,
-    name = terms$`GO term definition`
+    name = terms$`GO term name`
   )
 
   all_genes <- all_mo_genes()

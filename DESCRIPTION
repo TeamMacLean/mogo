@@ -1,11 +1,14 @@
 Package: mogo
 Type: Package
-Title: GO analysis for M.oryzae
-Version: 0.1.0
+Title: GO analysis streamlined for M.oryzae
+Version: 0.1.2
 Author: Dan MacLean
 Maintainer: Dan MacLean <dan.maclean@tsl.ac.uk>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: Aggregate some common GO plots in one place for Magnaporthe
+    Combines plots from widely used GO packages into one place.
+    Provides a couple of functions for creating the objects with annotation data
+    to use in those packages. Can only use included Magnaporthe oryzae annotation
+    data.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
