@@ -70,6 +70,7 @@ enricher_to_david <- function(enrich,termsfile=NA){
   terms <- terms_data
   if (!is.na(termsfile)){
     terms <- readr::read_tsv(termsfile)
+  }
 
   terms <- dplyr::mutate(terms,
     short_category = dplyr::if_else(`GO domain` == 'biological_process', "BP",
