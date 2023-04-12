@@ -1,31 +1,30 @@
-Package: mogo
 Type: Package
+Package: mogo
 Title: GO analysis streamlined for M.oryzae
 Version: 0.1.2
 Author: Dan MacLean
 Maintainer: Dan MacLean <dan.maclean@tsl.ac.uk>
 Description: Aggregate some common GO plots in one place for Magnaporthe
-    Combines plots from widely used GO packages into one place.
-    Provides a couple of functions for creating the objects with annotation data
-    to use in those packages. Can only use included Magnaporthe oryzae annotation
-    data.
+    Combines plots from widely used GO packages into one place.  Provides
+    a couple of functions for creating the objects with annotation data to
+    use in those packages. Can only use included Magnaporthe oryzae
+    annotation data.
 License: MIT + file LICENSE
-Encoding: UTF-8
-LazyData: true
-biocViews:
+Depends: 
+    R (>= 2.10)
 Imports: 
-    clusterProfiler,
     dplyr,
-    enrichplot,
     ggupset,
     GOplot,
     here,
     readr
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: 
+    knitr
+biocViews:clusterProfiler, enrichplot
+Encoding: UTF-8
+LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
-Suggests: 
-    rmarkdown,
-    knitr
-VignetteBuilder: knitr
-Depends: 
-    R (>= 2.10)
