@@ -1,7 +1,7 @@
 Type: Package
 Package: mogo
 Title: GO analysis streamlined for M.oryzae
-Version: 0.1.2
+Version: 0.1.3
 Author: Dan MacLean
 Maintainer: Dan MacLean <dan.maclean@tsl.ac.uk>
 Description: Aggregate some common GO plots in one place for Magnaporthe
@@ -23,7 +23,7 @@ Suggests:
     rmarkdown
 VignetteBuilder: 
     knitr
-biocViews:clusterProfiler, enrichplot
+biocViews: clusterProfiler, enrichplot
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
