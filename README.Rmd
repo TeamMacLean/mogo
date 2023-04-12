@@ -47,9 +47,8 @@ First read in your gene expression file. You can do that with `read_csv()`. Mini
 ```{r setup, message=FALSE}
 library(readr)
 library(dplyr)
-library(here)
 
-gene_expression <- read_csv(here("inst", "extdata","sample_gene_expression.csv"))
+gene_expression <- read_csv(system.file("extdata","sample_gene_expression.csv", package="mogo"))
 gene_expression
 ```
 

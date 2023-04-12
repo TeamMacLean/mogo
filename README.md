@@ -1,7 +1,7 @@
 Basic GO Analysis with mogo
 ================
 Dan MacLean
-10 May, 2022
+12 April, 2023
 
 ## mogo
 
@@ -33,15 +33,13 @@ list of genes for GO analysis
 
 First read in your gene expression file. You can do that with
 `read_csv()`. Minimally it should contain the gene ID, the log fold
-change and the
-![p](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p "p")-value.
+change and the $p$-value.
 
 ``` r
 library(readr)
 library(dplyr)
-library(here)
 
-gene_expression <- read_csv(here("inst", "extdata","sample_gene_expression.csv"))
+gene_expression <- read_csv(system.file("extdata","sample_gene_expression.csv", package="mogo"))
 gene_expression
 #> # A tibble: 132 × 3
 #>    gene_id   log2fc  p.adj
@@ -56,14 +54,13 @@ gene_expression
 #>  8 MGG_16442  3.60  0.0434
 #>  9 MGG_01048 -3.36  0.309 
 #> 10 MGG_14883 -4.93  0.157 
-#> # … with 122 more rows
+#> # ℹ 122 more rows
 ```
 
 ### Filter as required
 
 We can now filter the genes to select only the ones with e.g
-![p \<= 0.05](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p%20%3C%3D%200.05 "p <= 0.05"),
-using `filter()`
+$p <= 0.05$, using `filter()`
 
 ``` r
 filtered_gene_expression <- filter(gene_expression, p.adj <= 0.05)
@@ -176,7 +173,7 @@ Works ok, but the text can make it a bit unwieldy
 
 ``` r
 library(clusterProfiler)
-#> clusterProfiler v4.4.0  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
+#> clusterProfiler v4.6.2  For help: https://yulab-smu.top/biomedical-knowledge-mining-book/
 #> 
 #> If you use clusterProfiler in published research, please cite:
 #> T Wu, E Hu, S Xu, M Chen, P Guo, Z Dai, T Feng, L Zhou, W Tang, L Zhan, X Fu, S Liu, X Bo, and G Yu. clusterProfiler 4.0: A universal enrichment tool for interpreting omics data. The Innovation. 2021, 2(3):100141
@@ -223,13 +220,6 @@ part.
 
 ``` r
 david <- enricher_to_david(enrich)
-#> Rows: 59619 Columns: 6
-#> ── Column specification ────────────────────────────────────────────────────────
-#> Delimiter: "\t"
-#> chr (6): Gene stable ID, GO term accession, GO term name, GO term definition...
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 expr_info <- data.frame(
   ID = filtered_gene_expression$gene_id,
   logFC = filtered_gene_expression$log2fc

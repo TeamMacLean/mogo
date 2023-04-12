@@ -45,7 +45,7 @@ mo_mapping <- function(termsfile=NA) {
 #' @export
 do_enrich <- function(genes, termsfile=NA, ...) {
 
-  here::here("inst", "extdata", "MG8_mart_export.txt")
+  #here::here("inst", "extdata", "MG8_mart_export.txt")
   info <- mo_mapping()
   if (! is.na(termsfile)){
     info <- mo_mapping(termsfile=termsfile)

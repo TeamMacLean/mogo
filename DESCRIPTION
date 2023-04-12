@@ -11,9 +11,12 @@ Description: Aggregate some common GO plots in one place for Magnaporthe
     annotation data.
 License: MIT + file LICENSE
 Depends: 
-    R (>= 2.10)
-Imports: 
+    R (>= 4.0)
+biocViews:
+Imports:
+    clusterProfiler,
     dplyr,
+    enrichplot,
     ggupset,
     GOplot,
     readr
@@ -22,7 +25,6 @@ Suggests:
     rmarkdown
 VignetteBuilder: 
     knitr
-biocViews: clusterProfiler, enrichplot
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
